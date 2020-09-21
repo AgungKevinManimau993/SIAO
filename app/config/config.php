@@ -1,6 +1,6 @@
 <?php
 
-define('BASEURL', 'http://localhost/SIAO/public/');
+define('BASEURL', 'https://siao-pintu-air.herokuapp.com/public/');
 
 //DB
 define('DB_HOST','localhost');
