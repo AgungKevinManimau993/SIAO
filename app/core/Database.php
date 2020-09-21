@@ -20,6 +20,7 @@ class Database{
             
             try {
                 $this->dbh = new PDO($dsn, $this->db_user , $this->db_pass, $option);
+                echo 'Connection Success';
             } catch (PDOException $e) {
                 die($e->getMessage());
             }
