@@ -29,9 +29,9 @@ class Auth extends Controller{
                 $I++;
             }
             
+            $uid = $usession['id_user'];
+            $timeuser = $this->model('User_model')->UpdateTimeUser($uid);
             var_dump($yourmenu);
-            // $uid = $usession['id_user'];
-            // // $timeuser = $this->model('User_model')->UpdateTimeUser($uid);
             // if($this->model('User_model')->UpdateTimeUser($uid) > 0){
             //     $uid = $usession['id_user'];
             //     $mgr =  $this->model('Auth_model')->getidManager($uid);
