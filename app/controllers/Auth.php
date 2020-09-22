@@ -10,8 +10,8 @@ class Auth extends Controller{
     }
     public function login()
     {
-        if($this->model('User_model')->getAllUser($_POST)){
-            $usession = $this->model('User_model')->getAllUser($_POST);
+        if($this->model('User_model')->getUserforAuth($_POST)){
+            $usession = $this->model('User_model')->getUserforAuth($_POST);
             // $idrole = $usession['id_role'];
             // $myrole = $this->model('Role_model')->getRolebyId($idrole);
             // $menurole = $this->model('HakAkses_model')->getHakAksesbyIdRole($idrole);
