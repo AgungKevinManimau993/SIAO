@@ -37,7 +37,7 @@ class User_model {
     public function UpdateTimeUser($id)
     {
         $waktusekarang = time();
-        $query = "UPDATE ". $this->table ." SET `last_login`=:time WHERE `id_user`=:id ";
+        $query = "UPDATE ". $this->table ." SET last_login=:time WHERE id_user=:id ";
         $this->db->query($query);
         $this->db->bind('time',$waktusekarang);
         $this->db->bind('id',$id);
