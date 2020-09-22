@@ -55,6 +55,7 @@ class Auth extends Controller{
             header('Location: ' . BASEURL . 'Auth');
             exit;
         }
+        echo $usession;
         
 
 
