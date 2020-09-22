@@ -28,9 +28,9 @@ class User_model {
         return $this->db->single();
     }
     public function getUserforAuth($data){
-        $this->db->query('SELECT * FROM '.$this->table.' WHERE username="admin" and password="admin"');
-        // $this->db->bind('uname',$data['username']);
-        // $this->db->bind('paswd',$data['password']);
+        $this->db->query('SELECT * FROM '.$this->table.' WHERE username=:uname and password=:paswd');
+        $this->db->bind('uname',$data['username']);
+        $this->db->bind('paswd',$data['password']);
 
         return $this->db->single();
     }
