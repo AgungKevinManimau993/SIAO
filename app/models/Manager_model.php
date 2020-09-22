@@ -2,7 +2,7 @@
 
 class Manager_model {
     private $table = 'manager';
-    private $table2 = 'user';
+    private $table2 = 'users';
     private $table3 = 'cabang';
     private $db;
 
@@ -13,8 +13,8 @@ class Manager_model {
     public function getAllManager(){
         
         $this->db->query('SELECT * FROM manager
-                        INNER JOIN user
-                        ON manager.id_user=user.id_user
+                        INNER JOIN users
+                        ON manager.id_user=users.id_user
                         INNER JOIN cabang
                         ON manager.id_cabang=cabang.id');
         return $this->db->resultSet();
