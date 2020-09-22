@@ -30,27 +30,27 @@ class Auth extends Controller{
             }
             
             $uid = $usession['id_user'];
-            $timeuser = $this->model('User_model')->UpdateTimeUser($uid);
-            var_dump($yourmenu);
-            // if($this->model('User_model')->UpdateTimeUser($uid) > 0){
+            // $timeuser = $this->model('User_model')->UpdateTimeUser($uid);
+            // var_dump($yourmenu);
+            if($this->model('User_model')->UpdateTimeUser($uid) > 0){
             //     $uid = $usession['id_user'];
-            //     $mgr =  $this->model('Auth_model')->getidManager($uid);
+                $mgr =  $this->model('Auth_model')->getidManager($uid);
             //     // $idmgr = $mgr['id_manager'];
-            //     $_SESSION['info'] = [
-            //         'uname' => $usession['username'],
-            //         'pass' => $_POST['password'], 
-            //         'idrole' => $myrole['id'],
-            //         'role' => $myrole['role']
-            //     ];
-            //     $_SESSION['manager'] = $mgr;
-            //     $_SESSION['menu']=$yourmenu;
-            //     // header('Location: ' . BASEURL . 'Home');
+                $_SESSION['info'] = [
+                    'uname' => $usession['username'],
+                    'pass' => $_POST['password'], 
+                    'idrole' => $myrole['id'],
+                    'role' => $myrole['role']
+                ];
+                $_SESSION['manager'] = $mgr;
+                $_SESSION['menu']=$yourmenu;
+                header('Location: ' . BASEURL . 'Home');
 
-            // }else{
-            //     Flasher::setFlash('Gagal','username dan password anda salah','danger','icon-close');
-            //     header('Location: ' . BASEURL . 'Auth');
-            //     exit;
-            // }       
+            }else{
+                Flasher::setFlash('Gagal','username dan password anda salah','danger','icon-close');
+                header('Location: ' . BASEURL . 'Auth');
+                exit;
+            }       
         }else{
             Flasher::setFlash('Gagal','username dan password anda salah','danger','icon-close');
             header('Location: ' . BASEURL . 'Auth');
