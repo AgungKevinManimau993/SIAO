@@ -11,7 +11,7 @@ class Home extends Controller{
     }
     public function index(){
         $data['title'] = 'DASHBOARD';
-        if(isset($_SESSION['info']['idrole'])){
+        if(isset($_SESSION['info']['idrole']) >= 3){
             header('Location: ' . BASEURL . 'Home/preview');
         }else{
         switch(isset($_SESSION['manager'])){
