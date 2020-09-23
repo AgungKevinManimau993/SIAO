@@ -14,6 +14,8 @@ class Home extends Controller{
         if(isset($_SESSION['info'])){
             $ondata = $_SESSION['info'];
             var_dump($ondata);
+            echo '<br>';
+            echo $ondata['idrole'];
             // if($ondata['idrole'] >= 3){
             //     header('Location: ' . BASEURL . 'Home/preview');
             // }else{
