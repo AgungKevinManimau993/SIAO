@@ -24,7 +24,7 @@ class Home extends Controller{
                 case null :
                     
                     // $data['cbg'] = ['nama_cab' => 'Data Seluruh Cabag'];
-                    $data['agt'] = $this->model('Anggota_model')->getAllAnggota();
+                    // $data['agt'] = $this->model('Anggota_model')->getAllAnggota();
                     // $data['cbg'] = $this->model('Cabang_model')->getAllCabang();
                     // $data['filagt'] = [];
                     // $i = 0;
@@ -58,10 +58,10 @@ class Home extends Controller{
                     // $data['trans'] = $this->model('Transaksi_model')->getAllTransaksi();
                     // echo 'hi';
                     // var_dump($data['trans']);
-                    $this->view('templates/header',$data);
-                    $this->view('templates/topbar',$data);
+                    $this->view('templates/header');
+                    $this->view('templates/topbar');
                     $this->view('templates/menus');
-                    $this->view('home/admin',$data);
+                    $this->view('home/admin');
                     $this->view('templates/footer/admin');
                     break;
                 default :
