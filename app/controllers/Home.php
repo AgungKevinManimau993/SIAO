@@ -23,9 +23,9 @@ class Home extends Controller{
             switch($_SESSION['manager']){
                 case null :
                     
-                    $data['cbg'] = ['nama_cab' => 'Data Seluruh Cabag'];
+                    // $data['cbg'] = ['nama_cab' => 'Data Seluruh Cabag'];
                     $data['agt'] = $this->model('Anggota_model')->getAllAnggota();
-                    $data['cbg'] = $this->model('Cabang_model')->getAllCabang();
+                    // $data['cbg'] = $this->model('Cabang_model')->getAllCabang();
                     // $data['filagt'] = [];
                     // $i = 0;
                     // foreach($data['agt'] as $agt){
@@ -55,14 +55,14 @@ class Home extends Controller{
                     // array_multisort($key, SORT_DESC, $data['filcbg']);
                     
                     // $data['nas'] = $this->model('Nasabah_model')->getAllNasabah();
-                    $data['trans'] = $this->model('Transaksi_model')->getAllTransaksi();
-                    echo 'hi';
-                    var_dump($data['trans']);
-                    // $this->view('templates/header',$data);
-                    // $this->view('templates/topbar',$data);
-                    // $this->view('templates/menus');
-                    // $this->view('home/admin',$data);
-                    // $this->view('templates/footer/admin');
+                    // $data['trans'] = $this->model('Transaksi_model')->getAllTransaksi();
+                    // echo 'hi';
+                    // var_dump($data['trans']);
+                    $this->view('templates/header',$data);
+                    $this->view('templates/topbar',$data);
+                    $this->view('templates/menus');
+                    $this->view('home/admin',$data);
+                    $this->view('templates/footer/admin');
                     break;
                 default :
                     $data['cbg'] = $this->model('Cabang_model')->getCabangbyId($_SESSION['manager']['id_cabang']);
