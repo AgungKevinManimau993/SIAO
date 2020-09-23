@@ -19,6 +19,7 @@ class Home extends Controller{
             if($ondata['idrole'] == 3){
                 header('Location: ' . BASEURL . 'Home/preview');
             }else{
+            var_dump($_SESSION['manager']);
             switch($_SESSION['manager']){
                 case null :
                     // $data['cbg'] = ['nama_cab' => 'Data Seluruh Cabag'];
