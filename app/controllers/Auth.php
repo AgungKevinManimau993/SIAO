@@ -39,7 +39,7 @@ class Auth extends Controller{
                 $_SESSION['info'] = [
                     'uname' => $usession['username'],
                     'pass' => $_POST['password'], 
-                    'idrole' => $myrole['id'],
+                    'idrole' => $idrole,
                     'role' => $myrole['role']
                 ];
                 $_SESSION['manager'] = $mgr;
