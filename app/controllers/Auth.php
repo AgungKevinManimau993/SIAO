@@ -42,7 +42,11 @@ class Auth extends Controller{
                     'idrole' => $idrole,
                     'role' => $myrole['role']
                 ];
-                $_SESSION['manager'] = $mgr;
+                if($mgr){
+                    $_SESSION['manager'] = $mgr;
+                }else{
+                    $_SESSION['manager'] = null;
+                }
                 $_SESSION['menu']=$yourmenu;
                 header('Location: ' . BASEURL . 'Home');
 
