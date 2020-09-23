@@ -11,7 +11,7 @@ class Home extends Controller{
     }
     public function index(){
         $data['title'] = 'DASHBOARD';
-        if($_SESSION['info']['idrole'] >= 3){
+        if(isset($_SESSION['info']['idrole']) >= 3){
             header('Location: ' . BASEURL . 'Home/preview');
         }else{
         switch($_SESSION['manager']){
@@ -47,7 +47,6 @@ class Home extends Controller{
                 $key = array_column($data['filcbg'], 'jml_bayar');
                 array_multisort($key, SORT_DESC, $data['filcbg']);
                 
-                // print_r($data['filcbg']);
                 $data['nas'] = $this->model('Nasabah_model')->getAllNasabah();
                 $data['trans'] = $this->model('Transaksi_model')->getAllTransaksi();
                 $this->view('templates/header',$data);
