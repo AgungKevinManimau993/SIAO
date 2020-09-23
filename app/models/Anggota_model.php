@@ -11,9 +11,7 @@ class Anggota_model {
     }
 
     public function getAllAnggota(){
-        $this->db->query('SELECT * FROM '.$this->table.' 
-                        INNER JOIN '.$this->table2.' ON '.$this->table.'.id_jabatan='.$this->table2.'.id 
-                        INNER JOIN '.$this->table3.' ON '.$this->table.'.id_cabang='.$this->table3.'.id');
+        $this->db->query('SELECT * FROM '.$this->table.' INNER JOIN '.$this->table2.' ON '.$this->table.'.id_jabatan='.$this->table2.'.id INNER JOIN '.$this->table3.' ON '.$this->table.'.id_cabang='.$this->table3.'.id');
         // $this->db->query('SELECT * FROM '.$this->table);
         return $this->db->resultSet();
     }
