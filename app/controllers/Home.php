@@ -11,10 +11,10 @@ class Home extends Controller{
     }
     public function index(){
         $data['title'] = 'DASHBOARD';
-        if(isset($_SESSION['info']['idrole']) && $_SESSION['info']['idrole'] > 2){
+        if(isset($_SESSION['info']['idrole'])){
             header('Location: ' . BASEURL . 'Home/preview');
         }else{
-        switch($_SESSION['manager']){
+        switch(isset($_SESSION['manager'])){
             case null :
                 // $data['cbg'] = ['nama_cab' => 'Data Seluruh Cabag'];
                 $data['agt'] = $this->model('Anggota_model')->getAllAnggota();
