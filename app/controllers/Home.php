@@ -22,45 +22,46 @@ class Home extends Controller{
             // var_dump($_SESSION['manager']);
             switch($_SESSION['manager']){
                 case null :
-                    $data['cbg'] = ['nama_cab' => 'Data Seluruh Cabag'];
-                    $data['agt'] = $this->model('Anggota_model')->getAllAnggota();
-                    $data['cbg'] = $this->model('Cabang_model')->getAllCabang();
-                    $data['filagt'] = [];
-                    $i = 0;
-                    foreach($data['agt'] as $agt){
-                        if($agt['jabatan'] != 'ASSISTEN'){
+                    echo 'hi';
+                    // $data['cbg'] = ['nama_cab' => 'Data Seluruh Cabag'];
+                    // $data['agt'] = $this->model('Anggota_model')->getAllAnggota();
+                    // $data['cbg'] = $this->model('Cabang_model')->getAllCabang();
+                    // $data['filagt'] = [];
+                    // $i = 0;
+                    // foreach($data['agt'] as $agt){
+                    //     if($agt['jabatan'] != 'ASSISTEN'){
                             
-                            $data['filagt'][$i] = [
-                                'id_agt' => $agt['id_agt']
-                            ];
-                            $i++;
-                        }    
-                    }
-                    $data['filcbg'] = [];
-                    $j = 0;
-                    foreach($data['cbg'] as $cbg){ 
-                        $data['detailTrans'] = $this->model('Transaksi_model')->FilterTglTransaksiCabang($cbg['id']);                       
-                        $data['filcbg'][$j] = [
-                            'id_cbg' => $cbg['id'],
-                            'nm_cbg' => $cbg['nama_cab'],
-                            'jml_transaksi' => $data['detailTrans']['jml_transaksi'],
-                            'jml_bayar' => $data['detailTrans']['jml_bayar'],
-                            'income' => $data['detailTrans']['income'],
-                            'sisa_bayar' => $data['detailTrans']['sisa_bayar']
-                        ];
-                        $j++;   
-                    }
-                    $key = array_column($data['filcbg'], 'jml_bayar');
-                    array_multisort($key, SORT_DESC, $data['filcbg']);
+                    //         $data['filagt'][$i] = [
+                    //             'id_agt' => $agt['id_agt']
+                    //         ];
+                    //         $i++;
+                    //     }    
+                    // }
+                    // $data['filcbg'] = [];
+                    // $j = 0;
+                    // foreach($data['cbg'] as $cbg){ 
+                    //     $data['detailTrans'] = $this->model('Transaksi_model')->FilterTglTransaksiCabang($cbg['id']);                       
+                    //     $data['filcbg'][$j] = [
+                    //         'id_cbg' => $cbg['id'],
+                    //         'nm_cbg' => $cbg['nama_cab'],
+                    //         'jml_transaksi' => $data['detailTrans']['jml_transaksi'],
+                    //         'jml_bayar' => $data['detailTrans']['jml_bayar'],
+                    //         'income' => $data['detailTrans']['income'],
+                    //         'sisa_bayar' => $data['detailTrans']['sisa_bayar']
+                    //     ];
+                    //     $j++;   
+                    // }
+                    // $key = array_column($data['filcbg'], 'jml_bayar');
+                    // array_multisort($key, SORT_DESC, $data['filcbg']);
                     
-                    $data['nas'] = $this->model('Nasabah_model')->getAllNasabah();
-                    $data['trans'] = $this->model('Transaksi_model')->getAllTransaksi();
-                    $this->view('templates/header',$data);
-                    $this->view('templates/topbar',$data);
-                    $this->view('templates/menus');
-                    $this->view('home/admin',$data);
-                    $this->view('templates/footer/admin');
-                    break;
+                    // $data['nas'] = $this->model('Nasabah_model')->getAllNasabah();
+                    // $data['trans'] = $this->model('Transaksi_model')->getAllTransaksi();
+                    // $this->view('templates/header',$data);
+                    // $this->view('templates/topbar',$data);
+                    // $this->view('templates/menus');
+                    // $this->view('home/admin',$data);
+                    // $this->view('templates/footer/admin');
+                    // break;
                 default :
                     $data['cbg'] = $this->model('Cabang_model')->getCabangbyId($_SESSION['manager']['id_cabang']);
                     $data['agt'] = $this->model('Anggota_model')->getAnggotabyIdCabang($_SESSION['manager']['id_cabang']);
