@@ -22,76 +22,78 @@ class Home extends Controller{
             switch($_SESSION['manager']){
                 case null :
                     // $data['cbg'] = ['nama_cab' => 'Data Seluruh Cabag'];
-                    $data['agt'] = $this->model('Anggota_model')->getAllAnggota();
-                    $data['cbg'] = $this->model('Cabang_model')->getAllCabang();
-                    $data['filagt'] = [];
-                    $i = 0;
-                    foreach($data['agt'] as $agt){
-                        if($agt['jabatan'] != 'ASSISTEN'){
+                    // $data['agt'] = $this->model('Anggota_model')->getAllAnggota();
+                    // $data['cbg'] = $this->model('Cabang_model')->getAllCabang();
+                    // $data['filagt'] = [];
+                    // $i = 0;
+                    // foreach($data['agt'] as $agt){
+                    //     if($agt['jabatan'] != 'ASSISTEN'){
                             
-                            $data['filagt'][$i] = [
-                                'id_agt' => $agt['id_agt']
-                            ];
-                            $i++;
-                        }    
-                    }
-                    $data['filcbg'] = [];
-                    $j = 0;
-                    foreach($data['cbg'] as $cbg){ 
-                        $data['detailTrans'] = $this->model('Transaksi_model')->FilterTglTransaksiCabang($cbg['id']);                       
-                        $data['filcbg'][$j] = [
-                            'id_cbg' => $cbg['id'],
-                            'nm_cbg' => $cbg['nama_cab'],
-                            'jml_transaksi' => $data['detailTrans']['jml_transaksi'],
-                            'jml_bayar' => $data['detailTrans']['jml_bayar'],
-                            'income' => $data['detailTrans']['income'],
-                            'sisa_bayar' => $data['detailTrans']['sisa_bayar']
-                        ];
-                        $j++;   
-                    }
-                    $key = array_column($data['filcbg'], 'jml_bayar');
-                    array_multisort($key, SORT_DESC, $data['filcbg']);
+                    //         $data['filagt'][$i] = [
+                    //             'id_agt' => $agt['id_agt']
+                    //         ];
+                    //         $i++;
+                    //     }    
+                    // }
+                    // $data['filcbg'] = [];
+                    // $j = 0;
+                    // foreach($data['cbg'] as $cbg){ 
+                    //     $data['detailTrans'] = $this->model('Transaksi_model')->FilterTglTransaksiCabang($cbg['id']);                       
+                    //     $data['filcbg'][$j] = [
+                    //         'id_cbg' => $cbg['id'],
+                    //         'nm_cbg' => $cbg['nama_cab'],
+                    //         'jml_transaksi' => $data['detailTrans']['jml_transaksi'],
+                    //         'jml_bayar' => $data['detailTrans']['jml_bayar'],
+                    //         'income' => $data['detailTrans']['income'],
+                    //         'sisa_bayar' => $data['detailTrans']['sisa_bayar']
+                    //     ];
+                    //     $j++;   
+                    // }
+                    // $key = array_column($data['filcbg'], 'jml_bayar');
+                    // array_multisort($key, SORT_DESC, $data['filcbg']);
                     
-                    $data['nas'] = $this->model('Nasabah_model')->getAllNasabah();
-                    $data['trans'] = $this->model('Transaksi_model')->getAllTransaksi();
-                    $this->view('templates/header',$data);
-                    $this->view('templates/topbar',$data);
-                    $this->view('templates/menus');
-                    $this->view('home/admin',$data);
-                    $this->view('templates/footer/admin');
-                    break;
+                    // $data['nas'] = $this->model('Nasabah_model')->getAllNasabah();
+                    // $data['trans'] = $this->model('Transaksi_model')->getAllTransaksi();
+                    // $this->view('templates/header',$data);
+                    // $this->view('templates/topbar',$data);
+                    // $this->view('templates/menus');
+                    // $this->view('home/admin',$data);
+                    // $this->view('templates/footer/admin');
+                    // break;
+                    echo 'Admin';
                 default :
+                    echo 'Manager';
                     // $data['cbg'] = $this->model('Cabang_model')->getCabangbyId($_SESSION['manager']['id_cabang']);
-                    $data['agt'] = $this->model('Anggota_model')->getAnggotabyIdCabang($_SESSION['manager']['id_cabang']);
-                    $data['filagt'] = [];
-                    $i = 0;
-                    foreach($data['agt'] as $agt){
-                        if($agt['jabatan'] != 'ASSISTEN'){
-                            $data['detailTrans'] = $this->model('Transaksi_model')->FilterTglTransaksi($agt['id_agt']);
+                    // $data['agt'] = $this->model('Anggota_model')->getAnggotabyIdCabang($_SESSION['manager']['id_cabang']);
+                    // $data['filagt'] = [];
+                    // $i = 0;
+                    // foreach($data['agt'] as $agt){
+                    //     if($agt['jabatan'] != 'ASSISTEN'){
+                    //         $data['detailTrans'] = $this->model('Transaksi_model')->FilterTglTransaksi($agt['id_agt']);
                           
-                            $data['filagt'][$i] = [
-                                'id_agt' => $agt['id_agt'],
-                                'nama_ao' => $agt['nama'],
-                                'jml_transaksi' => $data['detailTrans']['jml_transaksi'],
-                                'jml_bayar' => $data['detailTrans']['jml_bayar'],
-                                'income' => $data['detailTrans']['income'],
-                                'sisa_bayar' => $data['detailTrans']['sisa_bayar']
-                            ];
-                            $i++;
-                        }    
-                    }
-                    $key = array_column($data['filagt'], 'jml_bayar');
-                    array_multisort($key, SORT_DESC, $data['filagt']);
-                    // var_dump($data['filagt']);
-                    $data['nas'] = $this->model('Nasabah_model')->getNasabahbyCabang($_SESSION['manager']['id_cabang']);
-                    $data['trans'] = $this->model('Transaksi_model')->getTransaksibyIdCab($_SESSION['manager']['id_cabang']);
+                    //         $data['filagt'][$i] = [
+                    //             'id_agt' => $agt['id_agt'],
+                    //             'nama_ao' => $agt['nama'],
+                    //             'jml_transaksi' => $data['detailTrans']['jml_transaksi'],
+                    //             'jml_bayar' => $data['detailTrans']['jml_bayar'],
+                    //             'income' => $data['detailTrans']['income'],
+                    //             'sisa_bayar' => $data['detailTrans']['sisa_bayar']
+                    //         ];
+                    //         $i++;
+                    //     }    
+                    // }
+                    // $key = array_column($data['filagt'], 'jml_bayar');
+                    // array_multisort($key, SORT_DESC, $data['filagt']);
+                    // // var_dump($data['filagt']);
+                    // $data['nas'] = $this->model('Nasabah_model')->getNasabahbyCabang($_SESSION['manager']['id_cabang']);
+                    // $data['trans'] = $this->model('Transaksi_model')->getTransaksibyIdCab($_SESSION['manager']['id_cabang']);
     
-                    $this->view('templates/header',$data);
-                    $this->view('templates/topbar',$data);
-                    $this->view('templates/menus');
-                    $this->view('home/index',$data);
-                    $this->view('templates/footer/user');
-                    break;
+                    // $this->view('templates/header',$data);
+                    // $this->view('templates/topbar',$data);
+                    // $this->view('templates/menus');
+                    // $this->view('home/index',$data);
+                    // $this->view('templates/footer/user');
+                    // break;
                 }
             }
         }
@@ -110,7 +112,7 @@ class Home extends Controller{
     }
     public function preview(){
         $data['cbg'] = $this->model('Cabang_model')->getAllCabang();
-        if(isset($_SESSION['keycab']) != null){
+        if($_SESSION['keycab'] != null){
                 $data['title'] = 'DASHBOARD';
     
                 $data['agt'] = $this->model('Anggota_model')->getAnggotabyIdCabang($_SESSION['keycab']['id']);
