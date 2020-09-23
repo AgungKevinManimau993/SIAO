@@ -15,31 +15,31 @@ class Transaksi_model {
     public function getAllTransaksi()
     {
         $this->db->query('SELECT * FROM '.$this->table.' 
-        INNER JOIN '.$this->table2.' ON '.$this->table.'.`id_agt`='.$this->table2.'.`id_agt` 
-        INNER JOIN '.$this->table3.' ON '.$this->table2.'.`id_cabang`='.$this->table3.'.`id` 
-        INNER JOIN '.$this->table4.' ON '.$this->table.'.`id_jenis_trans`='.$this->table4.'.`id_jenis` 
-        INNER JOIN '.$this->table5.' ON '.$this->table.'.`Nomor_Nasabah`='.$this->table5.'.`id_nasabah` 
-        ORDER BY `besar_pinjaman` DESC');
+        INNER JOIN '.$this->table2.' ON '.$this->table.'.id_agt='.$this->table2.'.id_agt 
+        INNER JOIN '.$this->table3.' ON '.$this->table2.'.id_cabang='.$this->table3.'.id 
+        INNER JOIN '.$this->table4.' ON '.$this->table.'.id_jenis_trans='.$this->table4.'.id_jenis 
+        INNER JOIN '.$this->table5.' ON '.$this->table.'.Nomor_Nasabah='.$this->table5.'.id_nasabah 
+        ORDER BY besar_pinjaman DESC');
         return $this->db->resultSet();
     }
     public function getTransaksibyId($id)
     {
         $this->db->query('SELECT * FROM '.$this->table.' 
-        INNER JOIN '.$this->table2.' ON '.$this->table.'.`id_agt`='.$this->table2.'.`id_agt` 
-        INNER JOIN '.$this->table3.' ON '.$this->table2.'.`id_cabang`='.$this->table3.'.`id` 
-        INNER JOIN '.$this->table4.' ON '.$this->table.'.`id_jenis_trans`='.$this->table4.'.`id_jenis` 
-        INNER JOIN '.$this->table5.' ON '.$this->table.'.`Nomor_Nasabah`='.$this->table5.'.`id_nasabah` 
+        INNER JOIN '.$this->table2.' ON '.$this->table.'.id_agt='.$this->table2.'.id_agt 
+        INNER JOIN '.$this->table3.' ON '.$this->table2.'.id_cabang='.$this->table3.'.id 
+        INNER JOIN '.$this->table4.' ON '.$this->table.'.id_jenis_trans='.$this->table4.'.id_jenis 
+        INNER JOIN '.$this->table5.' ON '.$this->table.'.Nomor_Nasabah='.$this->table5.'.id_nasabah 
         WHERE id_transaksi = :id');
         $this->db->bind('id',$id);
         return $this->db->single();
     }
     public function getTransaksibyIdCab($idcab){
         $this->db->query('SELECT * FROM '.$this->table.' 
-                        INNER JOIN '.$this->table2.' ON '.$this->table.'.`id_agt`='.$this->table2.'.`id_agt` 
-                        INNER JOIN '.$this->table3.' ON '.$this->table2.'.`id_cabang`='.$this->table3.'.`id` 
-                        INNER JOIN '.$this->table4.' ON '.$this->table.'.`id_jenis_trans`='.$this->table4.'.`id_jenis` 
-                        INNER JOIN '.$this->table5.' ON '.$this->table.'.`Nomor_Nasabah`='.$this->table5.'.`id_nasabah` 
-                        WHERE id = :idcab ORDER BY `besar_pinjaman` DESC');
+                        INNER JOIN '.$this->table2.' ON '.$this->table.'.id_agt='.$this->table2.'.id_agt 
+                        INNER JOIN '.$this->table3.' ON '.$this->table2.'.id_cabang='.$this->table3.'.id 
+                        INNER JOIN '.$this->table4.' ON '.$this->table.'.id_jenis_trans='.$this->table4.'.id_jenis 
+                        INNER JOIN '.$this->table5.' ON '.$this->table.'.Nomor_Nasabah='.$this->table5.'.id_nasabah 
+                        WHERE id = :idcab ORDER BY besar_pinjaman DESC');
         $this->db->bind('idcab',$idcab);
         return $this->db->resultSet();
     }
@@ -50,11 +50,11 @@ class Transaksi_model {
     }
     public function FilterTglTransaksiCabang($idcbg){
         $tgl_sekarang = date('Y-m-d'); 
-        $this->db->query('SELECT COUNT(IF((`cabang`.`id` = :idcbg) AND YEAR(`transaksi`.`date_create`) = YEAR(:tglsekarang) AND MONTH(`transaksi`.`date_create`) = MONTH(:tglsekarang), jumlah_bayar, NULL)) as jml_transaksi, 
-        SUM(IF((cabang.id = :idcbg) AND YEAR(`transaksi`.`date_create`) = YEAR(:tglsekarang) AND MONTH(`transaksi`.`date_create`) = MONTH(:tglsekarang), jumlah_bayar, 0)) as jml_bayar, 
-        SUM(IF((cabang.id = :idcbg) AND YEAR(`transaksi`.`date_create`) = YEAR(:tglsekarang) AND MONTH(`transaksi`.`date_create`) = MONTH(:tglsekarang), income, 0)) as income, 
-        SUM(IF((cabang.id = :idcbg) AND YEAR(`transaksi`.`date_create`) = YEAR(:tglsekarang) AND MONTH(`transaksi`.`date_create`) = MONTH(:tglsekarang), sisa_pinjam, 0)) as sisa_bayar 
-        FROM `transaksi` INNER JOIN `anggota` ON `anggota`.`id_agt`=`transaksi`.`id_agt` INNER JOIN `cabang` ON `cabang`.`id` = `anggota`.`id_cabang`');
+        $this->db->query('SELECT COUNT(IF((cabang.id = :idcbg) AND YEAR(transaksi.date_create) = YEAR(:tglsekarang) AND MONTH(transaksi.date_create) = MONTH(:tglsekarang), jumlah_bayar, NULL)) as jml_transaksi, 
+        SUM(IF((cabang.id = :idcbg) AND YEAR(transaksi.date_create) = YEAR(:tglsekarang) AND MONTH(transaksi.date_create) = MONTH(:tglsekarang), jumlah_bayar, 0)) as jml_bayar, 
+        SUM(IF((cabang.id = :idcbg) AND YEAR(transaksi.date_create) = YEAR(:tglsekarang) AND MONTH(transaksi.date_create) = MONTH(:tglsekarang), income, 0)) as income, 
+        SUM(IF((cabang.id = :idcbg) AND YEAR(transaksi.date_create) = YEAR(:tglsekarang) AND MONTH(transaksi.date_create) = MONTH(:tglsekarang), sisa_pinjam, 0)) as sisa_bayar 
+        FROM transaksi INNER JOIN anggota ON anggota.id_agt=transaksi.id_agt INNER JOIN cabang ON cabang.id = anggota.id_cabang');
         $this->db->bind('idcbg',$idcbg);
         $this->db->bind('tglsekarang',$tgl_sekarang);
         return $this->db->single();
@@ -73,11 +73,11 @@ class Transaksi_model {
     public function getTransaksiNasabah($idnas)
     {
         $this->db->query('SELECT * FROM '.$this->table.' 
-                        INNER JOIN '.$this->table2.' ON '.$this->table.'.`id_agt`='.$this->table2.'.`id_agt` 
-                        INNER JOIN '.$this->table3.' ON '.$this->table2.'.`id_cabang`='.$this->table3.'.`id` 
-                        INNER JOIN '.$this->table4.' ON '.$this->table.'.`id_jenis_trans`='.$this->table4.'.`id_jenis` 
-                        INNER JOIN '.$this->table5.' ON '.$this->table.'.`Nomor_Nasabah`='.$this->table5.'.`id_nasabah` 
-                        WHERE id_nasabah = :idnas ORDER BY `tgl_transaksi` ASC');
+                        INNER JOIN '.$this->table2.' ON '.$this->table.'.id_agt='.$this->table2.'.id_agt 
+                        INNER JOIN '.$this->table3.' ON '.$this->table2.'.id_cabang='.$this->table3.'.id 
+                        INNER JOIN '.$this->table4.' ON '.$this->table.'.id_jenis_trans='.$this->table4.'.id_jenis 
+                        INNER JOIN '.$this->table5.' ON '.$this->table.'.Nomor_Nasabah='.$this->table5.'.id_nasabah 
+                        WHERE id_nasabah = :idnas ORDER BY tgl_transaksi ASC');
         $this->db->bind('idnas',$idnas);
         return $this->db->resultSet();
     }
@@ -224,11 +224,11 @@ class Transaksi_model {
                         SUM(transaksi.jumlah_bayar) as jml_bayar,
                         SUM(transaksi.income) as income,
                         SUM(transaksi.sisa_pinjam) as sisa_bayar FROM '.$this->table.' 
-                        INNER JOIN '.$this->table2.' ON '.$this->table.'.`id_agt`='.$this->table2.'.`id_agt` 
-                        INNER JOIN '.$this->table3.' ON '.$this->table2.'.`id_cabang`='.$this->table3.'.`id` 
-                        INNER JOIN '.$this->table4.' ON '.$this->table.'.`id_jenis_trans`='.$this->table4.'.`id_jenis` 
-                        INNER JOIN '.$this->table5.' ON '.$this->table.'.`Nomor_Nasabah`='.$this->table5.'.`id_nasabah` 
-                        WHERE '.$this->table.'.`id_agt` = :idagt AND tgl_transaksi >= :nilai1 AND tgl_transaksi <= :nilai2 
+                        INNER JOIN '.$this->table2.' ON '.$this->table.'.id_agt='.$this->table2.'.id_agt 
+                        INNER JOIN '.$this->table3.' ON '.$this->table2.'.id_cabang='.$this->table3.'.id 
+                        INNER JOIN '.$this->table4.' ON '.$this->table.'.id_jenis_trans='.$this->table4.'.id_jenis 
+                        INNER JOIN '.$this->table5.' ON '.$this->table.'.Nomor_Nasabah='.$this->table5.'.id_nasabah 
+                        WHERE '.$this->table.'.id_agt = :idagt AND tgl_transaksi >= :nilai1 AND tgl_transaksi <= :nilai2 
                         ORDER BY tgl_transaksi ASC');
         
         $this->db->bind('nilai1',$nilai1);
@@ -241,9 +241,9 @@ class Transaksi_model {
         $tanggal = strtotime($data['tanggal']);
 
         $this->db->query('SELECT * FROM '.$this->table6.' 
-                        INNER JOIN '.$this->table2.' ON '.$this->table6.'.`id_agt`='.$this->table2.'.`id_agt` 
-                        INNER JOIN '.$this->table3.' ON '.$this->table2.'.`id_cabang`='.$this->table3.'.`id` 
-                        WHERE '.$this->table3.'.`id` = :idcab AND tgl_transaksi = :nilai1  
+                        INNER JOIN '.$this->table2.' ON '.$this->table6.'.id_agt='.$this->table2.'.id_agt 
+                        INNER JOIN '.$this->table3.' ON '.$this->table2.'.id_cabang='.$this->table3.'.id 
+                        WHERE '.$this->table3.'.id = :idcab AND tgl_transaksi = :nilai1  
                         ORDER BY tgl_transaksi ASC');
         
         $this->db->bind('nilai1',$tanggal);
@@ -274,11 +274,11 @@ class Transaksi_model {
         $beginDate = $this->getTransaksiDateBegin($idcab);
 
         $this->db->query('SELECT * FROM '.$this->table.' 
-                        INNER JOIN '.$this->table2.' ON '.$this->table.'.`id_agt`='.$this->table2.'.`id_agt` 
-                        INNER JOIN '.$this->table3.' ON '.$this->table2.'.`id_cabang`='.$this->table3.'.`id` 
-                        INNER JOIN '.$this->table4.' ON '.$this->table.'.`id_jenis_trans`='.$this->table4.'.`id_jenis` 
-                        INNER JOIN '.$this->table5.' ON '.$this->table.'.`Nomor_Nasabah`='.$this->table5.'.`id_nasabah` 
-                        WHERE '.$this->table3.'.`id` = :idcab AND `tgl_transaksi` >= :tglmula AND `tgl_transaksi` <= :tgl');
+                        INNER JOIN '.$this->table2.' ON '.$this->table.'.id_agt='.$this->table2.'.id_agt 
+                        INNER JOIN '.$this->table3.' ON '.$this->table2.'.id_cabang='.$this->table3.'.id 
+                        INNER JOIN '.$this->table4.' ON '.$this->table.'.id_jenis_trans='.$this->table4.'.id_jenis 
+                        INNER JOIN '.$this->table5.' ON '.$this->table.'.Nomor_Nasabah='.$this->table5.'.id_nasabah 
+                        WHERE '.$this->table3.'.id = :idcab AND tgl_transaksi >= :tglmula AND tgl_transaksi <= :tgl');
         
         $this->db->bind('tglmula', $beginDate);
         $this->db->bind('tgl',$date);
@@ -291,11 +291,11 @@ class Transaksi_model {
     public function getTransaksiDateBegin($idcab)
     {
         $this->db->query('SELECT * FROM '.$this->table.' 
-                        INNER JOIN '.$this->table2.' ON '.$this->table.'.`id_agt`='.$this->table2.'.`id_agt` 
-                        INNER JOIN '.$this->table3.' ON '.$this->table2.'.`id_cabang`='.$this->table3.'.`id` 
-                        INNER JOIN '.$this->table4.' ON '.$this->table.'.`id_jenis_trans`='.$this->table4.'.`id_jenis` 
-                        INNER JOIN '.$this->table5.' ON '.$this->table.'.`Nomor_Nasabah`='.$this->table5.'.`id_nasabah` 
-                        WHERE '.$this->table3.'.`id` = :idcab ORDER BY tgl_transaksi ASC');
+                        INNER JOIN '.$this->table2.' ON '.$this->table.'.id_agt='.$this->table2.'.id_agt 
+                        INNER JOIN '.$this->table3.' ON '.$this->table2.'.id_cabang='.$this->table3.'.id 
+                        INNER JOIN '.$this->table4.' ON '.$this->table.'.id_jenis_trans='.$this->table4.'.id_jenis 
+                        INNER JOIN '.$this->table5.' ON '.$this->table.'.Nomor_Nasabah='.$this->table5.'.id_nasabah 
+                        WHERE '.$this->table3.'.id = :idcab ORDER BY tgl_transaksi ASC');
         $this->db->bind('idcab',$idcab);
         $mataram = $this->db->resultSet();
         $beginTrans = $mataram[0]['tgl_transaksi'];
@@ -306,7 +306,7 @@ class Transaksi_model {
         $bulansekarang = date('Y-'.$bulan.'-d');
         $tglsekarang = date('Y-m-d');
 
-            $this->db->query('SELECT SUM(`jumlah_bayar`) as jml_bayar FROM `transaksi` WHERE YEAR(date_create) = YEAR("'.$tglsekarang.'") AND MONTH(date_create) = MONTH("'.$bulansekarang.'")');
+            $this->db->query('SELECT SUM(jumlah_bayar) as jml_bayar FROM transaksi WHERE YEAR(date_create) = YEAR("'.$tglsekarang.'") AND MONTH(date_create) = MONTH("'.$bulansekarang.'")');
 
             // $this->db->bind('bulan',$bulan);
             // $this->db->bind('tanggal',$tglsekarang);
@@ -320,7 +320,7 @@ class Transaksi_model {
         $bulansekarang = date('Y-'.$bulan.'-d');
         $tglsekarang = date('Y-m-d');
 
-            $this->db->query('SELECT SUM(`jumlah_bayar`) as jml_bayar FROM `transaksi` INNER JOIN anggota ON anggota.id_agt=transaksi.id_agt INNER JOIN cabang ON cabang.id = anggota.id_cabang WHERE id_cabang = :idcab AND YEAR(transaksi.date_create) = YEAR("'.$tglsekarang.'") AND MONTH(transaksi.date_create) = MONTH("'.$bulansekarang.'")');
+            $this->db->query('SELECT SUM(jumlah_bayar) as jml_bayar FROM transaksi INNER JOIN anggota ON anggota.id_agt=transaksi.id_agt INNER JOIN cabang ON cabang.id = anggota.id_cabang WHERE id_cabang = :idcab AND YEAR(transaksi.date_create) = YEAR("'.$tglsekarang.'") AND MONTH(transaksi.date_create) = MONTH("'.$bulansekarang.'")');
 
             $this->db->bind('idcab',$idcab);
             // $this->db->bind('bulan',$bulan);

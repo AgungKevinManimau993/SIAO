@@ -12,20 +12,20 @@ class Anggota_model {
 
     public function getAllAnggota(){
         $this->db->query('SELECT * FROM '.$this->table.' 
-                        INNER JOIN '.$this->table2.' ON '.$this->table.'.`id_jabatan`='.$this->table2.'.`id` 
-                        INNER JOIN '.$this->table3.' ON '.$this->table.'.`id_cabang`='.$this->table3.'.`id`');
+                        INNER JOIN '.$this->table2.' ON '.$this->table.'.id_jabatan='.$this->table2.'.id 
+                        INNER JOIN '.$this->table3.' ON '.$this->table.'.id_cabang='.$this->table3.'.id');
         // $this->db->query('SELECT * FROM '.$this->table);
         return $this->db->resultSet();
     }
     public function getAnggotabyId($id){
-        $this->db->query('SELECT * FROM '.$this->table.' INNER JOIN '.$this->table2.' ON '.$this->table.'.`id_jabatan`='.$this->table2.'.`id` WHERE id_agt = :idagt');
+        $this->db->query('SELECT * FROM '.$this->table.' INNER JOIN '.$this->table2.' ON '.$this->table.'.id_jabatan='.$this->table2.'.id WHERE id_agt = :idagt');
         $this->db->bind('idagt',$id);
         
         return $this->db->single();
     }
    public function getAnggotabyIdCabang($id)
    {
-    $this->db->query('SELECT * FROM '.$this->table.' INNER JOIN `jabatan` ON `anggota`.`id_jabatan`=`jabatan`.`id` WHERE id_cabang=:id');
+    $this->db->query('SELECT * FROM '.$this->table.' INNER JOIN jabatan ON anggota.id_jabatan=jabatan.id WHERE id_cabang=:id');
     $this->db->bind('id', $id);
     return $this->db->resultSet();
    }

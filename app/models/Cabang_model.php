@@ -68,10 +68,7 @@ class Cabang_model {
             header('Location:'.BASEURL.'cabang');
         }
        
-        $query = "UPDATE $this->table SET `nrp`=:nrp,
-                                          `nama_cab`=:nama,
-                                          `status`=:stat
-                                        WHERE id=:id";
+        $query = "UPDATE ".$this->table." SET nrp=:nrp, nama_cab=:nama, status=:stat WHERE id=:id";
         
         $this->db->query($query);
         $this->db->bind('id',$data['id']);
