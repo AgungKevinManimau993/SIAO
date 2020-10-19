@@ -26,18 +26,18 @@ class Home extends Controller{
                     // $data['cbg'] = ['nama_cab' => 'Data Seluruh Cabag'];
                     $data['agt'] = $this->model('Anggota_model')->getAllAnggota();
                     // $data['cbg'] = $this->model('Cabang_model')->getAllCabang();
-                    $data['filagt'] = [];
-                    $i = 0;
-                    foreach($data['agt'] as $agt){
-                        if($agt['jabatan'] != 'ASSISTEN'){
+                    // $data['filagt'] = [];
+                    // $i = 0;
+                    // foreach($data['agt'] as $agt){
+                    //     if($agt['jabatan'] == 'AO'){
                             
-                            $data['filagt'][$i] = [
-                                'id_agt' => $agt['id_agt']
-                            ];
-                            $i++;
-                        }    
-                    }
-                    var_dump($data['filagt']);
+                    //         $data['filagt'][$i] = [
+                    //             'id_agt' => $agt['id_agt']
+                    //         ];
+                    //         $i++;
+                    //     }    
+                    // }
+                    var_dump($data['agt']);
                     // $data['filcbg'] = [];
                     // $j = 0;
                     // foreach($data['cbg'] as $cbg){ 
