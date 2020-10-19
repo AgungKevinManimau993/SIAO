@@ -55,14 +55,14 @@ class Home extends Controller{
                     // array_multisort($key, SORT_DESC, $data['filcbg']);
                     
                     // $data['nas'] = $this->model('Nasabah_model')->getAllNasabah();
-                    // $data['trans'] = $this->model('Transaksi_model')->getAllTransaksi();
+                    $data['trans'] = $this->model('Transaksi_model')->getAllTransaksi();
                     // echo 'hi';
-                    // var_dump($data['trans']);
-                    $this->view('templates/header',$data);
-                    $this->view('templates/topbar',$data);
-                    $this->view('templates/menus');
-                    $this->view('home/admin',$data);
-                    $this->view('templates/footer/admin');
+                    var_dump($data['trans']);
+                    // $this->view('templates/header',$data);
+                    // $this->view('templates/topbar',$data);
+                    // $this->view('templates/menus');
+                    // $this->view('home/admin',$data);
+                    // $this->view('templates/footer/admin');
                     break;
                 default :
                     $data['cbg'] = $this->model('Cabang_model')->getCabangbyId($_SESSION['manager']['id_cabang']);
